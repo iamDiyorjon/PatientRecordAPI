@@ -1,6 +1,16 @@
-﻿namespace PatientRecord.Web.Brokers.Storages
+﻿using PatientRecord.Web.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+
+namespace PatientRecord.Web.Brokers.Storages
 {
-    public interface IStorageBroker
+    public partial interface IStorageBroker
     {
+        ValueTask<Doctor> InsertDoctorAsync(Doctor doctor);
+        IQueryable<Doctor> SelectAllDoctor();
+        ValueTask<Doctor> SelectDoctorByIdAsync(Guid id);
+        ValueTask<Doctor> UpdateDoctorAsync(Doctor doctor);
+        ValueTask<Doctor> DeleteDoctorAsync(Doctor doctor);
     }
 }
