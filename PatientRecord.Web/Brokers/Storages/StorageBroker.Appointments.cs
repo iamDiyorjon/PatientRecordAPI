@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PatientRecord.Web.Models;
+using PatientRecord.Web.Models.Appointments;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
