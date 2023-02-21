@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Foundations\Doctors\" />
     <Folder Include="Services\Foundations\Patients\" />
   </ItemGroup>
 
