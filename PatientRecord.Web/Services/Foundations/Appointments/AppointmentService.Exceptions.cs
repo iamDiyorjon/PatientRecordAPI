@@ -3,6 +3,7 @@ using PatientRecord.Web.Models.Appointments.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Xeptions;
 
 namespace PatientRecord.Web.Services.Foundations.Appointments
 {
@@ -21,9 +22,13 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
             {
                 throw CreateAndLogValidationException(nullAppointmentException);
             }
+            catch(InvalidAppointmentException invalidAppointmentException)
+            {
+                throw CreateAndLogValidationException(invalidAppointmentException);
+            }
         }
 
-        private Exception CreateAndLogValidationException(NullAppointmentException nullAppointmentException)
+        private Exception CreateAndLogValidationException(Xeption exception)
         {
             throw new NotImplementedException();
         }

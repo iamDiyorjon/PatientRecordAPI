@@ -1,4 +1,5 @@
-﻿using PatientRecord.Web.Brokers.Loggings;
+﻿using PatientRecord.Web.Brokers.DataTimes;
+using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
 using PatientRecord.Web.Models.Appointments;
 using PatientRecord.Web.Services.Foundations.Appoinments;
@@ -12,12 +13,16 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
+        private readonly IDateTimeBroker dateTimeBroker;
 
-        public AppointmentService(ILoggingBroker loggingBroker, 
-            IStorageBroker storageBroker)
+        public AppointmentService(
+            ILoggingBroker loggingBroker,
+            IStorageBroker storageBroker,
+            IDateTimeBroker dateTimeBroker)
         {
             this.loggingBroker = loggingBroker;
             this.storageBroker = storageBroker;
+            this.dateTimeBroker = dateTimeBroker;
         }
 
         public ValueTask<Appointment> AddAppointmentAsync(Appointment appointment)
