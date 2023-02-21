@@ -1,7 +1,7 @@
-﻿using PatientRecord.Web.Models;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System;
+using PatientRecord.Web.Models.Patients;
 
 namespace PatientRecord.Web.Brokers.Storages
 {
