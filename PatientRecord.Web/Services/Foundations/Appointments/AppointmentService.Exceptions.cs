@@ -1,4 +1,6 @@
-﻿using PatientRecord.Web.Models.Appointments;
+﻿using EFxceptions.Models.Exceptions;
+using Microsoft.Data.SqlClient;
+using PatientRecord.Web.Models.Appointments;
 using PatientRecord.Web.Models.Appointments.Exceptions;
 using System;
 using System.Linq;
@@ -26,11 +28,68 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
             {
                 throw CreateAndLogValidationException(invalidAppointmentException);
             }
+            catch(NotFoundAppointmentException notFoundAppointmentException)
+            {
+                throw CreateAndLogValidationException(notFoundAppointmentException);
+            }
+            catch(DuplicateKeyException  duplicateKeyException)
+            {
+                var alreadyExistsAppointmentException =
+                    new AlreadyExistsAppointmentException(duplicateKeyException);
+               
+                throw CreateAndDependencyValidationException(alreadyExistsAppointmentException);
+            }
+            catch (Exception serviceException)
+            {
+                var appointmentServiceException =
+                    new AppointmentServiceException(serviceException);
+
+                throw CreateAndLogServiceException(appointmentServiceException);
+            }
         }
 
-        private Exception CreateAndLogValidationException(Xeption exception)
+        private IQueryable<Appointment>TryCatch(ReturningAppointmentsFunction returningAppointmentsFunction)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return returningAppointmentsFunction();
+            }
+            catch (Exception serviceException)
+            {
+                var appointmentServiceException =
+                    new AppointmentServiceException(serviceException);
+
+                throw CreateAndLogServiceException(appointmentServiceException);
+            }
+        }
+
+        private AppointmentServiceException CreateAndLogServiceException(Exception innerException)
+        {
+            this.loggingBroker.LogError(innerException);
+
+            throw innerException;
+        }
+
+        private AppointmentDependencyValidationException CreateAndDependencyValidationException(AlreadyExistsAppointmentException alreadyExistsAppointmentException)
+        {
+
+            var appointmentDependencyValidationException =
+                new AppointmentDependencyValidationException(alreadyExistsAppointmentException);
+
+            this.loggingBroker.LogCritical(appointmentDependencyValidationException);
+
+            return appointmentDependencyValidationException;
+        }
+
+        private AppointmentValidationException CreateAndLogValidationException(Xeption exception)
+        {
+            var appointmentValidationException = 
+                new AppointmentValidationException(exception);
+
+            this.loggingBroker.LogError(appointmentValidationException);
+
+            return appointmentValidationException;
+            
         }
     }
 }

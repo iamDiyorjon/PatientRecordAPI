@@ -25,29 +25,59 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
             this.dateTimeBroker = dateTimeBroker;
         }
 
-        public ValueTask<Appointment> AddAppointmentAsync(Appointment appointment)
+        public ValueTask<Appointment> AddAppointmentAsync(Appointment appointment) =>
+        TryCatch(async () =>
         {
-            throw new NotImplementedException();
-        }
+            ValidateAppointmentOnAddAndModify(appointment);
 
-        public ValueTask<Appointment> ModifyAppointmentAsync(Appointment appointment)
-        {
-            throw new NotImplementedException();
-        }
+            return await this.storageBroker.InsertAppointmentAsync(appointment);
+        });
 
-        public ValueTask<Appointment> RemoveAppointmentByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public IQueryable<Appointment> RetriveAllAppointments() =>
+            TryCatch(() => this.storageBroker.SelectAllAppoinment());
 
-        public IQueryable<Appointment> RetriveAllAppointments()
+        public ValueTask<Appointment> RetriveAppointmentByIdAsync(Guid id) =>
+        TryCatch(async () =>
         {
-            throw new NotImplementedException();
-        }
+            ValidateAppointmentId(id);
 
-        public ValueTask<Appointment> RetriveAppointmentByIdAsync(Guid id)
+            var maybeAppointment =
+                await this.storageBroker.SelectAppointmentByIdAsync(id);
+
+            ValidateStorageAppointment(maybeAppointment, id);
+
+            return maybeAppointment;
+        });
+
+        public ValueTask<Appointment> ModifyAppointmentAsync(Appointment appointment) =>
+        TryCatch(async () =>
         {
-            throw new NotImplementedException();
-        }
+            ValidateAppointmentOnAddAndModify(appointment);
+
+            var maybeApponiment =
+                await this.storageBroker.SelectAppointmentByIdAsync(appointment.Id);
+
+            ValidateStorageAppointment(maybeApponiment, appointment.Id);
+
+            return await this.storageBroker.UpdateAppointmentAsync(appointment);
+        });
+
+        public ValueTask<Appointment> RemoveAppointmentByIdAsync(Guid id) =>
+        TryCatch(async () =>
+        {
+            ValidateAppointmentId(id);
+
+            var maybeAppointment =
+                await this.storageBroker.SelectAppointmentByIdAsync(id);
+
+            ValidateStorageAppointment(maybeAppointment, id);
+
+            var result = await this.storageBroker.DeleteAppointmentAsync(maybeAppointment);
+
+            return  result;
+        });
+
+
+
     }
 }
