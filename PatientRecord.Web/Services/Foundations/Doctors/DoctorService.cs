@@ -13,16 +13,13 @@ namespace PatientRecord.Web.Services.Foundations.Doctors
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
-        private readonly IDateTimeBroker dateTimeBroker;
 
         public DoctorService(
             ILoggingBroker loggingBroker,
-            IStorageBroker storageBroker,
-            IDateTimeBroker dateTimeBroker)
+            IStorageBroker storageBroker)
         {
             this.loggingBroker = loggingBroker;
             this.storageBroker = storageBroker;
-            this.dateTimeBroker = dateTimeBroker;
         }
 
         public ValueTask<Doctor> AddDoctorAsync(Doctor doctor) =>
