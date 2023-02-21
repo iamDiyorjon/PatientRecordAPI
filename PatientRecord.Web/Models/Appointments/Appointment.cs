@@ -18,6 +18,6 @@ public class Appointment
     public Patient Patient { get; set; }
     public Guid Patient_Id { get; set; }
     public Doctor Doctor { get; set; }
-    public Guid Docotor_Id { get; set; }
+    public Guid Doctor_Id { get; set; }
 
 }

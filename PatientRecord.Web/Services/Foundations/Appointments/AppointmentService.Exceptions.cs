@@ -70,11 +70,11 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
             throw innerException;
         }
 
-        private AppointmentDependencyValidationException CreateAndDependencyValidationException(AlreadyExistsAppointmentException alreadyExistsAppointmentException)
+        private AppointmentDependencyValidationException CreateAndDependencyValidationException(Xeption exception)
         {
 
             var appointmentDependencyValidationException =
-                new AppointmentDependencyValidationException(alreadyExistsAppointmentException);
+                new AppointmentDependencyValidationException(exception);
 
             this.loggingBroker.LogCritical(appointmentDependencyValidationException);
 
@@ -89,7 +89,6 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
             this.loggingBroker.LogError(appointmentValidationException);
 
             return appointmentValidationException;
-            
         }
     }
 }

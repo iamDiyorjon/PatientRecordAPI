@@ -13,11 +13,10 @@ namespace PatientRecord.Web.Brokers.Storages.Configurations
             builder.Property(app=>app.DateOfMeeting).
                 IsRequired();
 
-            builder.Property(app=>app.Address)
-                .HasMaxLength(250)
-                .IsRequired();
+            builder.Property(app => app.Address)
+                .HasMaxLength(250);
 
-            builder.Property(app=>app.Docotor_Id)
+            builder.Property(app=>app.Doctor_Id)
                 .IsRequired();
             
             builder.Property(app=>app.Patient_Id)

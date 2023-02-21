@@ -14,7 +14,7 @@ namespace PatientRecord.Web.Brokers.Storages.Configurations
 
             builder.HasMany<Appointment>()
                 .WithOne(app => app.Doctor)
-                .HasForeignKey(pa => pa.Docotor_Id);
+                .HasForeignKey(pa => pa.Doctor_Id);
 
             builder.HasIndex(pa => pa.PhoneNumber)
                 .IsUnique();

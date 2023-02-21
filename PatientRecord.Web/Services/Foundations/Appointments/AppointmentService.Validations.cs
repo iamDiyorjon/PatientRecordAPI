@@ -13,14 +13,14 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
                 (Rule: IsInvalid(appointment.Id), Parameter: nameof(Appointment.Id)),
                 (Rule: IsInvalid(appointment.DateOfMeeting), Parameter: nameof(Appointment.DateOfMeeting)),
                 (Rule: IsInvalid(appointment.Patient_Id), Paremeter: nameof(Appointment.Patient_Id)),
-                (Rule: IsInvalid(appointment.Docotor_Id), Paremeter: nameof(Appointment.Docotor_Id)));
+                (Rule: IsInvalid(appointment.Doctor_Id), Paremeter: nameof(Appointment.Doctor_Id)));
 
         }
 
         private static dynamic IsInvalid(DateTime date) => new
         {
             Condition = date == default,
-            Message = "Value is rewuired"
+            Message = "Value is required"
         };
 
         private static dynamic IsInvalid(Guid id) => new
@@ -40,7 +40,7 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
         {
             if (appointment == null)
             {
-                throw new ArgumentNullException();
+                throw new NullAppointmentException();
             }
         }
 

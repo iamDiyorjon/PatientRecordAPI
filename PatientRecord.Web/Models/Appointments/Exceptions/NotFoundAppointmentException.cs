@@ -6,7 +6,7 @@ namespace PatientRecord.Web.Models.Appointments.Exceptions
     public class NotFoundAppointmentException : Xeption
     {
         public NotFoundAppointmentException(Guid appointmentId)
-            : base(message: $"Could not find user with id:{appointmentId}.")
+            : base(message: $"Could not find appointment with id:{appointmentId}.")
         { }
     }
 }

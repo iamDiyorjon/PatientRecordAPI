@@ -13,16 +13,12 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
-        private readonly IDateTimeBroker dateTimeBroker;
-
         public AppointmentService(
             ILoggingBroker loggingBroker,
-            IStorageBroker storageBroker,
-            IDateTimeBroker dateTimeBroker)
+            IStorageBroker storageBroker)
         {
             this.loggingBroker = loggingBroker;
             this.storageBroker = storageBroker;
-            this.dateTimeBroker = dateTimeBroker;
         }
 
         public ValueTask<Appointment> AddAppointmentAsync(Appointment appointment) =>
@@ -76,8 +72,5 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
 
             return  result;
         });
-
-
-
     }
 }
