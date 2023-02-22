@@ -1,10 +1,9 @@
 ﻿using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
-using PatientRecord.Web.Models.Doctors;
+using PatientRecord.Web.Models.Patients;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
-using PatientRecord.Web.Models.Patients;
 
 namespace PatientRecord.Web.Services.Foundations.Patients
 {

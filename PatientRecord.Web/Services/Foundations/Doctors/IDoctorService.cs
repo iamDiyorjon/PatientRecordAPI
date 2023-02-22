@@ -1,8 +1,7 @@
-﻿using PatientRecord.Web.Models.Appointments;
+﻿using PatientRecord.Web.Models.Doctors;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
-using PatientRecord.Web.Models.Doctors;
 
 namespace PatientRecord.Web.Services.Foundations.Doctors
 {

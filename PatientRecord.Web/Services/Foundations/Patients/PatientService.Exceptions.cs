@@ -1,6 +1,4 @@
 ﻿using EFxceptions.Models.Exceptions;
-using PatientRecord.Web.Models.Doctors;
-using PatientRecord.Web.Models.Doctors.Exceptions;
 using PatientRecord.Web.Models.Patients;
 using PatientRecord.Web.Models.Patients.Exceptions;
 using System;

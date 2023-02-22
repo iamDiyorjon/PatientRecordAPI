@@ -18,8 +18,8 @@ namespace PatientRecord.Web.Services.Foundations.Doctors
 
         private static dynamic IsInvalid(string text) => new
         {
-            Condition=text==string.Empty,
-            Message="Text is required"
+            Condition = text == string.Empty,
+            Message = "Text is required"
         };
 
         private static dynamic IsInvalid(DateTime date) => new

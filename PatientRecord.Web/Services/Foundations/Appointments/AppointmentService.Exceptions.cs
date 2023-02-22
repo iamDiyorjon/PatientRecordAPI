@@ -1,5 +1,4 @@
 ﻿using EFxceptions.Models.Exceptions;
-using Microsoft.Data.SqlClient;
 using PatientRecord.Web.Models.Appointments;
 using PatientRecord.Web.Models.Appointments.Exceptions;
 using System;
@@ -14,29 +13,29 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
         private delegate ValueTask<Appointment> ReturningAppointmentFunction();
         private delegate IQueryable<Appointment> ReturningAppointmentsFunction();
 
-        private async ValueTask<Appointment>TryCatch(ReturningAppointmentFunction returningAppointmentFunction)
+        private async ValueTask<Appointment> TryCatch(ReturningAppointmentFunction returningAppointmentFunction)
         {
             try
             {
                 return await returningAppointmentFunction();
             }
-            catch(NullAppointmentException nullAppointmentException)
+            catch (NullAppointmentException nullAppointmentException)
             {
                 throw CreateAndLogValidationException(nullAppointmentException);
             }
-            catch(InvalidAppointmentException invalidAppointmentException)
+            catch (InvalidAppointmentException invalidAppointmentException)
             {
                 throw CreateAndLogValidationException(invalidAppointmentException);
             }
-            catch(NotFoundAppointmentException notFoundAppointmentException)
+            catch (NotFoundAppointmentException notFoundAppointmentException)
             {
                 throw CreateAndLogValidationException(notFoundAppointmentException);
             }
-            catch(DuplicateKeyException  duplicateKeyException)
+            catch (DuplicateKeyException duplicateKeyException)
             {
                 var alreadyExistsAppointmentException =
                     new AlreadyExistsAppointmentException(duplicateKeyException);
-               
+
                 throw CreateAndDependencyValidationException(alreadyExistsAppointmentException);
             }
             catch (Exception serviceException)
@@ -48,7 +47,7 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
             }
         }
 
-        private IQueryable<Appointment>TryCatch(ReturningAppointmentsFunction returningAppointmentsFunction)
+        private IQueryable<Appointment> TryCatch(ReturningAppointmentsFunction returningAppointmentsFunction)
         {
             try
             {
@@ -83,7 +82,7 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
 
         private AppointmentValidationException CreateAndLogValidationException(Xeption exception)
         {
-            var appointmentValidationException = 
+            var appointmentValidationException =
                 new AppointmentValidationException(exception);
 
             this.loggingBroker.LogError(appointmentValidationException);

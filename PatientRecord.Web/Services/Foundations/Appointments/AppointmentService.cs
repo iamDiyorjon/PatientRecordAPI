@@ -1,5 +1,4 @@
-﻿using PatientRecord.Web.Brokers.DataTimes;
-using PatientRecord.Web.Brokers.Loggings;
+﻿using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
 using PatientRecord.Web.Models.Appointments;
 using PatientRecord.Web.Services.Foundations.Appoinments;
@@ -70,7 +69,7 @@ namespace PatientRecord.Web.Services.Foundations.Appointments
 
             var result = await this.storageBroker.DeleteAppointmentAsync(maybeAppointment);
 
-            return  result;
+            return result;
         });
     }
 }
