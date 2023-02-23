@@ -1,9 +1,9 @@
 ﻿namespace PatientRecord.Web.Services.DTOs
 {
     public record DoctorDTO(
-        string fristName,
+        string firstName,
         string lastName,
         int age,
         string specialist,
-        string phoneNumber );
+        string phoneNumber);
 }

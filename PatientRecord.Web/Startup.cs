@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
+using PatientRecord.Web.Services.Foundations.Doctors;
 using PatientRecord.Web.Services.Foundations.Patients;
 using PatientRecord.Web.Services.Mapper;
 using PatientRecord.Web.Services.Processings.Новая_папка;
@@ -40,6 +41,7 @@ namespace PatientRecord.Web
 
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddTransient<IPatientService, PatientService>();
+            services.AddTransient<IDoctorService, DoctorService>();
             services.AddTransient<IStorageBroker, StorageBroker>();
             services.AddTransient<ILoggingBroker, LoggingBroker>();
         }

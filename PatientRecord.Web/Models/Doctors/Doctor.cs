@@ -1,12 +1,12 @@
-﻿using System;
+﻿using PatientRecord.Web.Models.Appointments;
+using System;
 using System.Collections.Generic;
-using PatientRecord.Web.Models.Appointments;
 
 namespace PatientRecord.Web.Models.Doctors;
 
 public class Doctor
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public int Age { get; set; }

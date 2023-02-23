@@ -37,7 +37,7 @@ namespace PatientRecord.Web.Brokers.Storages
         {
             var broker = new StorageBroker(this.configuration);
 
-            return await broker.FindAsync<T>();
+            return await broker.FindAsync<T>(objectIds);
         }
 
         private async ValueTask<T> UpdateAsync<T>(T @object)
