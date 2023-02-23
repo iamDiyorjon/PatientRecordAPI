@@ -1,7 +1,7 @@
 ﻿namespace PatientRecord.Web.Services.DTOs
 {
     public record PatientDTO(
-        string fristName,
+        string firstName,
         string lastName,
         int age,
         string email,

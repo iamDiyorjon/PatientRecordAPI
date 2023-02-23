@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,7 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
+using PatientRecord.Web.Services.Foundations.Patients;
+using PatientRecord.Web.Services.Mapper;
+using PatientRecord.Web.Services.Processings.Новая_папка;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +37,11 @@ namespace PatientRecord.Web
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PatientRecord.Web", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(MappingProfile));
+            services.AddTransient<IPatientService, PatientService>();
+            services.AddTransient<IStorageBroker, StorageBroker>();
+            services.AddTransient<ILoggingBroker, LoggingBroker>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

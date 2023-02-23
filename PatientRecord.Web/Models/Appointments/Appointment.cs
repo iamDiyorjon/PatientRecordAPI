@@ -13,7 +13,7 @@ public class Appointment
     public string Address { get; set; }
     public string Diagnosis { get; set; }
     public string Recipe { get; set; }
-    public IList<string> Image { get; set; }
+    //public IList<string> Image { get; set; }
     public bool Active { get; set; } = true;
     public Patient Patient { get; set; }
     public Guid Patient_Id { get; set; }
