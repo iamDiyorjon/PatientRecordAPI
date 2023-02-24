@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PatientRecord.Web.Models.Doctors;
 using PatientRecord.Web.Services.DTOs;
@@ -55,6 +56,28 @@ namespace PatientRecord.Web.Controllers
                 return Ok(doctorDTO);
             }
             catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<DoctorDTO>>ModifyDoctorAsync(DoctorDTO doctorDTO)
+        {
+            try
+            {
+                var inputDoctor = mapper.Map<Doctor>(doctorDTO);
+
+                inputDoctor.Id = Guid.Parse("3c9a4a09-9742-4e24-b3af-392f0f9d5914");
+
+                var modifiedDoctor =await doctorService.ModifyDoctorAsync(inputDoctor);
+
+                var outputDTO = mapper.Map<DoctorDTO>(modifiedDoctor);
+
+                return Ok(outputDTO);
+            }
+            catch (Exception)
             {
 
                 throw;

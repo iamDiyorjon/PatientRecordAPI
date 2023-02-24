@@ -1,29 +1,20 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
 using PatientRecord.Web.Services.Foundations.Doctors;
 using PatientRecord.Web.Services.Foundations.Patients;
 using PatientRecord.Web.Services.Mapper;
-using PatientRecord.Web.Services.Processings.Новая_папка;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PatientRecord.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)=>
+        public Startup(IConfiguration configuration) =>
             Configuration = configuration;
 
 
@@ -65,8 +56,6 @@ namespace PatientRecord.Web
             {
                 endpoints.MapControllers();
             });
-
-            
         }
     }
 }
