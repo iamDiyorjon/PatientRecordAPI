@@ -7,7 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PatientRecord.Web.Brokers.DataTimes;
+using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
+using PatientRecord.Web.Services.Foundations.Appoinments;
+using PatientRecord.Web.Services.Foundations.Doctors;
+using PatientRecord.Web.Services.Foundations.Patients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +37,23 @@ namespace PatientRecord.Web
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PatientRecord.Web", Version = "v1" });
             });
+
+            RegisterBrokers(services);
+            AddFoundationServices(services);
+        }
+
+        private static void AddFoundationServices(IServiceCollection services)
+        {
+            services.AddTransient<IDoctorService, DoctorService>();
+            services.AddTransient<IAppointmentService, IAppointmentService>();
+            services.AddTransient<IPatientService, PatientService>();
+        }
+
+        private static void RegisterBrokers(IServiceCollection services)
+        {
+            services.AddTransient<IStorageBroker, StorageBroker>();
+            services.AddTransient<IDateTimeBroker, DateTimeBroker>();
+            services.AddTransient<ILoggingBroker, LoggingBroker>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
