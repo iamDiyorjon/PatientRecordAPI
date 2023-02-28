@@ -10,9 +10,12 @@ using Microsoft.OpenApi.Models;
 using PatientRecord.Web.Brokers.DataTimes;
 using PatientRecord.Web.Brokers.Loggings;
 using PatientRecord.Web.Brokers.Storages;
+using PatientRecord.Web.Services.DTOs;
 using PatientRecord.Web.Services.Foundations.Appoinments;
+using PatientRecord.Web.Services.Foundations.Appointments;
 using PatientRecord.Web.Services.Foundations.Doctors;
 using PatientRecord.Web.Services.Foundations.Patients;
+using PatientRecord.Web.Services.Processings.PatientsProcess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +43,19 @@ namespace PatientRecord.Web
 
             RegisterBrokers(services);
             AddFoundationServices(services);
+            AddProcessingServices(services);
+            services.AddAutoMapper(typeof(MappingProfile));
+        }
+
+        private static void AddProcessingServices(IServiceCollection services)
+        {
+            services.AddTransient<IPatientProcessing, PatientProcessing>();
         }
 
         private static void AddFoundationServices(IServiceCollection services)
         {
             services.AddTransient<IDoctorService, DoctorService>();
-            services.AddTransient<IAppointmentService, IAppointmentService>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IPatientService, PatientService>();
         }
 
