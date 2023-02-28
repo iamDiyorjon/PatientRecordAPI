@@ -14,7 +14,7 @@ namespace PatientRecord.Web.Brokers.Storages
         public StorageBroker(IConfiguration configuration)
         {
             this.configuration = configuration;
-            this.Database.Migrate();
+            //this.Database.Migrate();
         }
 
         private async ValueTask<T> InsertAsync<T>(T @object)
